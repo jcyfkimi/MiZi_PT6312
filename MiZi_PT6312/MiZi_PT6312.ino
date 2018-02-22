@@ -3,6 +3,8 @@
 #define uchar unsigned char
 #define uint unsigned int
 uint VFD_display_ram[8];   // Memory usage：8 * 2Bytes
+uint num_array[]= {0x19a7, 0x1020, 0x30c3, 0x30e1, 0x3160, 0x21e1, 0x21e3, 0x11a0, 0x31e3, 0x31e1};
+uint char_array[]={0x31e2, 0x2163, 0x0183, 0x3063, 0x21c3, 0x21c2, 0x2163, 0x3162, 0x0489, 0x1021, 0x0992, 0x0103, 0x1b22, 0x1332, 0x2063, 0x31c2,0x3133, 0x31d2, 0x21e1, 0x0488, 0x1123, 0x0906, 0x1136, 0x0a14, 0x11e1, 0x2805};
 // - - PIN Definitions
 // - - PT6312 SPI
 int CLK = 10; // - - PT6312 clock pin
@@ -108,14 +110,14 @@ void loop() {
   }
   for (i = 0; i < 8; i++)
   {
-    for (j = 0; j < 65535; j++)
+    for (j = 0; j < 26; j++)
     {
-      VFD_display_ram[i] = j;
+      VFD_display_ram[i] = char_array[j];
       Serial.print("j = ");
       Serial.println(j);
       if (i) VFD_display_ram[i - 1] = 0x0000;
       VFD_update();
-      delay(1000);
+      delay(500);
     }
   }
   VFD_clr();
